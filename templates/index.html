@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List приложение</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .add-task {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        .add-task input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .add-task input:focus {
+            border-color: #4CAF50;
+        }
+        
+        .add-task button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .add-task button:hover {
+            background-color: #45a049;
+        }
+        
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 4px solid #ddd;
+            transition: transform 0.2s;
+        }
+        
+        .task-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .task-item.completed {
+            background-color: #f0f0f0;
+            border-left-color: #4CAF50;
+            opacity: 0.8;
+        }
+        
+        .task-item.completed .task-title {
+            text-decoration: line-through;
+            color: #666;
+        }
+        
+        .task-checkbox {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .task-title {
+            flex: 1;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 8px;
+            transition: color 0.3s;
+            opacity: 0.6;
+        }
+        
+        .delete-btn:hover {
+            color: #ff3333;
+            opacity: 1;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 5px 15px;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Список задач</h1>
+        
+        <div class="add-task">
+            <input type="text" id="newTaskInput" placeholder="Введите новую задачу..." />
+            <button onclick="addTask()">Добавить</button>
+        </div>
+        
+        <ul class="task-list" id="taskList"></ul>
+        
+        <div class="stats">
+            <span>Всего задач: <span id="totalCount">0</span></span>
+            <span>Выполнено: <span id="completedCount">0</span></span>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterTasks('all')">Все</button>
+                <button class="filter-btn" onclick="filterTasks('active')">Активные</button>
+                <button class="filter-btn" onclick="filterTasks('completed')">Выполненные</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
